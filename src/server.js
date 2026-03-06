@@ -1,14 +1,12 @@
 require('dotenv').config();
 const express = require('express');
-const mongoose = require('mongoose');
+const connectDB = require('./config/db');
 
 const app = express();
 
-app.use(express.json());
+connectDB();
 
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Conectado ao MongoDB com sucesso! ✅'))
-  .catch((err) => console.error('Erro ao conectar ao MongoDB:', err));
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('API Jitterbit com MOngoDB conectada! 🚀');
