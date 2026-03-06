@@ -30,6 +30,16 @@ class OrderService {
       return order;
     });
   }
+
+  async getByOrderNumber(orderNumber) {
+
+    const order = await Order.findOne({ orderId: orderNumber }).lean();
+    
+    if (!order) return null;
+
+    delete order._id;
+    return order;
+  }
 }
 
 module.exports = new OrderService();

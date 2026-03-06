@@ -7,4 +7,6 @@ routes.post('/order', OrderController.createOrder);
 
 routes.get('/order/list', OrderController.getAllOrders);
 
+routes.get('/order/:orderNumber', OrderController.getByOrderNumber);
+
 module.exports = routes;

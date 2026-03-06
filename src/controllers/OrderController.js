@@ -22,6 +22,21 @@ class OrderController {
       return res.status(500).json({ message: 'Erro ao buscar pedidos', error: error.message });
     }
   }
+
+  async getByOrderNumber(req, res) {
+    try {
+      const { orderNumber } = req.params; 
+      const order = await OrderService.getByOrderNumber(orderNumber);
+      
+      if (!order) {
+        return res.status(404).json({ message: 'Não encontrado, verifique o número do pedido' });
+      }
+      
+      return res.status(200).json(order);
+    } catch (error) {
+      return res.status(500).json({ message: 'Erro ao buscar pedido', error: error.message });
+    }
+  }
 }
 
 module.exports = new OrderController();
