@@ -21,6 +21,15 @@ class OrderService {
     
     return orderObject;
   }
+
+  async getAllOrders() {
+    const orders = await Order.find().lean();
+   
+    return orders.map(order => {
+      delete order._id;
+      return order;
+    });
+  }
 }
 
 module.exports = new OrderService();

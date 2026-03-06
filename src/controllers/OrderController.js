@@ -13,6 +13,15 @@ class OrderController {
       });
     }
   }
+
+  async getAllOrders(_req, res) {
+    try {
+      const orders = await OrderService.getAllOrders();
+      return res.status(200).json(orders);
+    } catch (error) {
+      return res.status(500).json({ message: 'Erro ao buscar pedidos', error: error.message });
+    }
+  }
 }
 
 module.exports = new OrderController();
