@@ -1,12 +1,14 @@
 require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db');
+const routes = require('./routes/routes');
 
 const app = express();
 
 connectDB();
 
 app.use(express.json());
+app.use(routes);
 
 app.get('/', (req, res) => {
   res.send('API Jitterbit com MOngoDB conectada! 🚀');
