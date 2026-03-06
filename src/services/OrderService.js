@@ -14,8 +14,12 @@ class OrderService {
     };
 
     const newOrder = await Order.create(orderData);
+
+    const orderObject = newOrder.toObject();
+
+    delete orderObject._id;
     
-    return newOrder;
+    return orderObject;
   }
 }
 
