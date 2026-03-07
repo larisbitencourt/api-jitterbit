@@ -9,4 +9,6 @@ routes.get('/order/list', OrderController.getAllOrders);
 
 routes.get('/order/:orderNumber', OrderController.getByOrderNumber);
 
+routes.put('/order/:orderNumber', OrderController.updateOrder);
+
 module.exports = routes;

@@ -40,6 +40,30 @@ class OrderService {
     delete order._id;
     return order;
   }
+
+  async updateOrder(orderNumber, data) {
+  
+  const updateData = {
+    value: data.valorTotal,
+    creationDate: data.dataCriacao,
+    items: data.items?.map(item => ({
+      productId: item.idItem,
+      quantity: item.quantidadeItem,
+      price: item.valorItem
+    }))
+  };
+
+  const updatedOrder = await Order.findOneAndUpdate(
+    { orderId: orderNumber },
+    { $set: updateData },
+    { new: true, runValidators: true }
+  ).lean();
+
+  if (!updatedOrder) return null;
+
+  delete updatedOrder._id;
+  return updatedOrder;
+}
 }
 
 module.exports = new OrderService();

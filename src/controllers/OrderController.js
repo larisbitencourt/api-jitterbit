@@ -37,6 +37,24 @@ class OrderController {
       return res.status(500).json({ message: 'Erro ao buscar pedido', error: error.message });
     }
   }
+
+  async updateOrder(req, res) {
+  try {
+    const { orderNumber } = req.params;
+    const updatedOrder = await OrderService.updateOrder(orderNumber, req.body);
+
+    if (!updatedOrder) {
+      return res.status(404).json({ message: 'Pedido não encontrado para atualização' });
+    }
+
+    return res.status(200).json(updatedOrder);
+  } catch (error) {
+    return res.status(400).json({ 
+      message: 'Erro ao atualizar pedido', 
+      error: error.message 
+    });
+  }
+}
 }
 
 module.exports = new OrderController();
