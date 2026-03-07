@@ -37,6 +37,15 @@ class OrderService {
     };
 
     const newOrder = await Order.create(orderData);
+
+   const quantityItemsUpdate = data.items.map(item => 
+     Product.updateOne(
+      { productId: item.idItem },
+      { $inc: { quantity: -item.quantidadeItem } }
+    )
+   );
+
+    await Promise.all(quantityItemsUpdate);
     
     return newOrder;
   }
