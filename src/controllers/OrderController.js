@@ -3,15 +3,8 @@ const OrderService = require('../services/OrderService');
 class OrderController {
   async createOrder(req, res) {
     try {
-
-      // REMOVER O USER E HOLLY DAQUI
-      const orderData = { 
-        ...req.body, 
-        user: req.userId,
-        holly: req.userHolly
-      };
-
-      const order = await OrderService.createOrder(orderData);
+      
+      const order = await OrderService.createOrder(req.body);
         return res.status(201).json(order);
       
     } catch (error) {
