@@ -23,4 +23,8 @@ const OrderSchema = new mongoose.Schema({
   ]
 });
 
+OrderSchema.pre('findOneAndUpdate', function() {
+  this.setUpdate({ $inc: { __v: 1 } });
+});
+
 module.exports = mongoose.model('Order', OrderSchema);
