@@ -27,7 +27,6 @@ class AuthController {
       );
 
       return res.json({
-        user: { name: user.name, email: user.email, role: user.role },
         token
       });
 

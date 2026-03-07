@@ -71,6 +71,7 @@ class OrderService {
       price: item.valorItem
     }))
   };
+  
 
   const updatedOrder = await Order.findOneAndUpdate(
     { orderId: orderNumber },
