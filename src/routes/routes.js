@@ -1,10 +1,14 @@
 const { Router } = require('express');
 const OrderController = require('../controllers/OrderController');
-const authMiddleware = require('./middlewares/auth');
+const UserController = require('../controllers/UserController')
+const AuthController = require('../controllers/AuthController')
+const authMiddleware = require('../middlewares/auth');
 
 const routes = new Router();
 
 routes.post('/login', AuthController.login);
+
+routes.post('/user', UserController.store);
 
 routes.get('/order/list', OrderController.getAllOrders);
 
