@@ -3,7 +3,14 @@ const OrderService = require('../services/OrderService');
 class OrderController {
   async createOrder(req, res) {
     try {
-      const order = await OrderService.createOrder(req.body);
+
+      const orderData = { 
+        ...req.body, 
+        user: req.userId,      
+        holly: req.userHolly   
+      };
+
+      const order = await OrderService.createOrder(orderData);
         return res.status(201).json(order);
       
     } catch (error) {
