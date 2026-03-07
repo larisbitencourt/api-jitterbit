@@ -4,6 +4,12 @@ const Product = require('../models/Product');
 class OrderService {
   async createOrder(data) {
 
+    const checkOrderExists = await Order.findOne({ orderId: data.numeroPedido });
+
+    if (checkOrderExists) {
+    throw new Error(`Pedido duplicado: ${data.numeroPedido} já existe.`);
+  }
+
     for (const item of data.items) {
       const product = await Product.findOne({ productId: item.idItem });
       if (!product) {
