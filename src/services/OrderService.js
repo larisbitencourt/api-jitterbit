@@ -5,10 +5,18 @@ class OrderService {
   async createOrder(data) {
 
     for (const item of data.items) {
-      const productExists = await Product.findOne({ productId: item.idItem });
-      if (!productExists) {
+      const product = await Product.findOne({ productId: item.idItem });
+      if (!product) {
         throw new Error(`Produto com ID ${item.idItem} não encontrado.`);
       }
+
+     if (product.quantity < item.quantidadeItem) {
+      throw new Error(`Estoque insuficiente para o produto ${item.idItem}. Disponível: ${product.stock}`);
+     }
+    
+     if (product.stock <= 0) {
+      throw new Error(`Produto com ID ${item.idItem} está com estoque zerado.`);
+     }
     }
 
     const orderData = {
