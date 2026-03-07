@@ -64,6 +64,10 @@ class OrderService {
   delete updatedOrder._id;
   return updatedOrder;
 }
+
+async deleteOrder(orderNumber) {
+  return await Order.findOneAndDelete({ orderId: orderNumber });
+}
 }
 
 module.exports = new OrderService();

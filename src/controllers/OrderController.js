@@ -55,6 +55,24 @@ class OrderController {
     });
   }
 }
+
+async deleteOrder(req, res) {
+  try {
+    const { orderNumber } = req.params;
+    const deletedOrder = await OrderService.deleteOrder(orderNumber);
+
+    if (!deletedOrder) {
+      return res.status(404).json({ message: 'Pedido não encontrado para exclusão' });
+    }
+
+    return res.status(204).send(); 
+  } catch (error) {
+    return res.status(500).json({ 
+      message: 'Erro ao deletar pedido', 
+      error: error.message 
+    });
+  }
+}
 }
 
 module.exports = new OrderController();
