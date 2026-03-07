@@ -4,10 +4,11 @@ class OrderController {
   async createOrder(req, res) {
     try {
 
+      // REMOVER O USER E HOLLY DAQUI
       const orderData = { 
         ...req.body, 
-        user: req.userId,      
-        holly: req.userHolly   
+        user: req.userId,
+        holly: req.userHolly
       };
 
       const order = await OrderService.createOrder(orderData);

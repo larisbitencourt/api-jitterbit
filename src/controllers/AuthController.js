@@ -10,6 +10,7 @@ class AuthController {
 
     try {
       const user = await User.findOne({ email }).select('+password');
+
       if (!user) {
         return res.status(401).json({ message: 'Usuário ou senha inválidos' });
       }

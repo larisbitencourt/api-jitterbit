@@ -13,9 +13,9 @@ module.exports = (req, res, next) => {
     return res.status(401).json({ message: 'Erro no formato do token' });
   }
 
-  const [scheme, token] = parts;
+  const [bearer, token] = parts;
 
-  if (!/^Bearer$/i.test(scheme)) {
+  if (!/^Bearer$/i.test(bearer)) {
     return res.status(401).json({ message: 'Token malformatado' });
   }
   

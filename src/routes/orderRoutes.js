@@ -8,7 +8,7 @@ const orderRoutes = new Router();
 
 orderRoutes.get('/list', authMiddleware, OrderController.getAllOrders);
 
-orderRoutes.get('/:orderNumber', authMiddleware, OrderController.getByOrderNumber);;
+orderRoutes.get('/:orderNumber', authMiddleware, OrderController.getByOrderNumber);
 
 orderRoutes.post('/', authMiddleware, isAdmin, OrderController.createOrder);
 
