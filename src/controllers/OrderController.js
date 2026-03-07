@@ -31,10 +31,10 @@ class OrderController {
     }
   }
 
-  async getByOrderNumber(req, res) {
+  async getByOrderId(req, res) {
     try {
-      const { orderNumber } = req.params; 
-      const order = await OrderService.getByOrderNumber(orderNumber);
+      const { orderId } = req.params; 
+      const order = await OrderService.getByOrderId(orderId);
       
       if (!order) {
         return res.status(404).json({ message: 'Não encontrado, verifique o número do pedido' });
@@ -48,8 +48,8 @@ class OrderController {
 
   async updateOrder(req, res) {
   try {
-    const { orderNumber } = req.params;
-    const updatedOrder = await OrderService.updateOrder(orderNumber, req.body);
+    const { orderId } = req.params;
+    const updatedOrder = await OrderService.updateOrder(orderId, req.body);
 
     if (!updatedOrder) {
       return res.status(404).json({ message: 'Pedido não encontrado para atualização' });
@@ -66,8 +66,8 @@ class OrderController {
 
 async deleteOrder(req, res) {
   try {
-    const { orderNumber } = req.params;
-    const deletedOrder = await OrderService.deleteOrder(orderNumber);
+    const { orderId } = req.params;
+    const deletedOrder = await OrderService.deleteOrder(orderId);
 
     if (!deletedOrder) {
       return res.status(404).json({ message: 'Pedido não encontrado para exclusão' });

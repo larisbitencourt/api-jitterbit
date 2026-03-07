@@ -48,16 +48,16 @@ class OrderService {
   
   }
 
-  async getByOrderNumber(orderNumber) {
+  async getByOrderId(orderId) {
 
-    const order = await Order.findOne({ orderId: orderNumber }).lean();
+    const order = await Order.findOne({ orderId: orderId }).lean();
     
     if (!order) return null;
 
     return order;
   }
 
-  async updateOrder(orderNumber, data) {
+  async updateOrder(orderId, data) {
 
   if (data.items && data.items.length > 0) {
       for (const item of data.items) {
@@ -80,7 +80,7 @@ class OrderService {
   
 
   const updatedOrder = await Order.findOneAndUpdate(
-    { orderId: orderNumber },
+    { orderId: orderId },
     { $set: updateData },
     { new: true, runValidators: true }
   ).lean();
@@ -90,8 +90,8 @@ class OrderService {
   return updatedOrder;
 }
 
-async deleteOrder(orderNumber) {
-  return await Order.findOneAndDelete({ orderId: orderNumber });
+async deleteOrder(orderId) {
+  return await Order.findOneAndDelete({ orderId: orderId });
 }
 }
 
