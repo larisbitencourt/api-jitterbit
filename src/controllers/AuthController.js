@@ -18,15 +18,15 @@ class AuthController {
       if (!isPasswordValid) {
         return res.status(401).json({ message: 'Usuário ou senha inválidos' });
       }
-
+      
       const token = jwt.sign(
-        { id: user._id, email: user.email, holly: user.holly }, 
+        { name: user.name, email: user.email, role: user.role }, 
         process.env.JWT_SECRET, 
         { expiresIn: '1d' } 
       );
 
       return res.json({
-        user: { name: user.name, email: user.email },
+        user: { name: user.name, email: user.email, role: user.role },
         token
       });
 

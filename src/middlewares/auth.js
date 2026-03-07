@@ -15,11 +15,16 @@ module.exports = (req, res, next) => {
 
   const [scheme, token] = parts;
 
-  jwt.verify(token, process.env.JWT_SECRET || 'fallback_secret', (err, decoded) => {
+  if (!/^Bearer$/i.test(scheme)) {
+    return res.status(401).json({ message: 'Token malformatado' });
+  }
+  
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return res.status(401).json({ message: 'Token inválido ou expirado' });
 
-    req.userId = decoded.id;
-    req.userHolly = decoded.holly;
+    req.userName = decoded.name;
+    req.userEmail = decoded.email;
+    req.userRole = decoded.role;
 
     return next();
   });

@@ -1,7 +1,16 @@
 const Order = require('../models/Order');
+const Product = require('../models/Product');
 
 class OrderService {
   async createOrder(data) {
+
+    for (const item of data.items) {
+      const productExists = await Product.findOne({ productId: item.idItem });
+      if (!productExists) {
+        throw new Error(`Produto com ID ${item.idItem} não encontrado.`);
+      }
+    }
+
     const orderData = {
       orderId: data.numeroPedido,
       value: data.valorTotal,
@@ -14,21 +23,15 @@ class OrderService {
     };
 
     const newOrder = await Order.create(orderData);
-
-    const orderObject = newOrder.toObject();
-
-    delete orderObject._id;
     
-    return orderObject;
+    return newOrder;
   }
 
   async getAllOrders() {
     const orders = await Order.find().lean();
    
-    return orders.map(order => {
-      delete order._id;
-      return order;
-    });
+    return orders;
+  
   }
 
   async getByOrderNumber(orderNumber) {
@@ -37,11 +40,19 @@ class OrderService {
     
     if (!order) return null;
 
-    delete order._id;
     return order;
   }
 
   async updateOrder(orderNumber, data) {
+
+  if (data.items && data.items.length > 0) {
+      for (const item of data.items) {
+        const productExists = await Product.findOne({ productId: item.idItem });
+        if (!productExists) {
+          throw new Error(`Produto com ID ${item.idItem} não encontrado.`);
+        }
+      }
+    }
   
   const updateData = {
     value: data.valorTotal,
@@ -61,7 +72,6 @@ class OrderService {
 
   if (!updatedOrder) return null;
 
-  delete updatedOrder._id;
   return updatedOrder;
 }
 
