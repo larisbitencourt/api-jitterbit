@@ -11,10 +11,10 @@ class OrderService {
       }
 
      if (product.quantity < item.quantidadeItem) {
-      throw new Error(`Estoque insuficiente para o produto ${item.idItem}. Disponível: ${product.stock}`);
+      throw new Error(`Estoque insuficiente para o produto ${item.idItem}. Disponível: ${product.quantity}`);
      }
     
-     if (product.stock <= 0) {
+     if (product.quantity <= 0) {
       throw new Error(`Produto com ID ${item.idItem} está com estoque zerado.`);
      }
     }
