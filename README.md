@@ -17,11 +17,17 @@ Segurança: JWT & Bcryptjs
 
 ## ▶️ Como Rodar a Aplicação:
 
-Clone o repositório: https://github.com/larisbitencourt/api-jitterbit
+1. Clone o repositório: https://github.com/larisbitencourt/api-jitterbit
 
 cd api-jitterbit
 
-Suba os containers: docker-compose up -d --build
+2. Configure as variáveis de ambiente:
+
+Crie o arquivo .env a partir do exemplo .env-example na raiz do projeto
+
+(Certifique-se de que o .env contenha as chaves necessárias como JWT_SECRET, PORT e MONGO_URI conforme o exemplo).
+
+3. Suba os containers: docker-compose up -d --build
 
 💡 O que o Docker fará automaticamente:
 
@@ -117,6 +123,20 @@ Geração de Estoque: No processo de seed (população inicial), as quantidades 
 
 Criação de Usuários: Inicialmente já se populam dois usuários, um user e um admin, porém existe a rota POST /users caso queira criar
 um novo usuário, e pode validállo na rota POST/login
+
+## 🧪 Testes e Cobertura (Coverage)
+
+A API possui uma suíte de testes unitários e de integração.
+
+Para rodar os testes utilizando o ambiente Docker:
+ 
+TODOS os testes (Unitários + Integração): docker-compose run --rm test
+
+Apenas testes UNITÁRIOS: docker-compose run --rm test npm run test:unit
+
+Apenas testes de INTEGRAÇÃO: docker-compose run --rm test npm run test:integration
+
+Gerar relatório de COBERTURA (Coverage): docker-compose run --rm test npm run coverage
 
 
 
