@@ -15,6 +15,17 @@ services:
     environment:
       - MONGODB_URI=mongodb://mongodb:27017/jitterbit_db
 
+  test:
+    build: .
+    command: npm test
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/jitterbit_db
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+      - /app/node_modules
+
   mongodb:
     image: mongo:latest
     container_name: mongodb-jitterbit

@@ -17,7 +17,7 @@ async function seed() {
     await User.deleteMany({});
   
     const mockProducts = Array.from({ length: 20 }, (_, i) => ({
-      productId: 1 + i,
+      productId: (1 + i).toString(),
       quantity: Math.floor(Math.random() * 50) + 10,
       price: 1000 + (i * 50)
     }));
