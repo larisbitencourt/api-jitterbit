@@ -14,6 +14,8 @@ Containerização: Docker & Docker Compose
 
 Segurança: JWT & Bcryptjs
 
+Arquitetura: MSC
+
 
 ## ▶️ Como Rodar a Aplicação:
 
@@ -27,7 +29,7 @@ Crie o arquivo .env a partir do exemplo .env-example na raiz do projeto
 
 (Certifique-se de que o .env contenha as chaves necessárias como JWT_SECRET, PORT e MONGO_URI conforme o exemplo).
 
-3. Suba os containers: docker-compose up -d --build
+3. Suba os containers:  ```docker-compose up -d --build```
 
 💡 O que o Docker fará automaticamente:
 
@@ -51,7 +53,7 @@ Acesso Direto ao MongoDB: localhost:27018
 
 ## 📬 Collection do postman:
 
-Para facilitar a análise no Postman, importe o arquivo postman_collection.json localizado na raiz do projeto. As rotas já estão configuradas para o ambiente local.
+Para facilitar a análise no Postman, importe o arquivo **postman_collection.json** localizado na raiz do projeto. As rotas já estão configuradas para o ambiente local.
 
 
 ## 🛣️ Guia de Requisições (Exemplos de JSON), em caso de não utilização do postman:
@@ -111,7 +113,7 @@ Geração: Se os dados estiverem corretos, a API retorna um token de acesso.
 
 Uso nas Rotas: Para acessar qualquer rota de Orders, o token deve ser enviado no Header ou Auth da requisição no Postman
 
-Header > Key: Authorization e Value: Bearer <SEU_TOKEN_AQUI>
+Header > Key: ```Authorization``` e Value: ```Bearer <SEU_TOKEN_AQUI>```
 
 ou
 
@@ -130,13 +132,13 @@ A API possui uma suíte de testes unitários e de integração.
 
 Para rodar os testes utilizando o ambiente Docker:
  
-TODOS os testes (Unitários + Integração): docker-compose run --rm test
+TODOS os testes (Unitários + Integração): ```docker-compose run --rm test```
 
-Apenas testes UNITÁRIOS: docker-compose run --rm test npm run test:unit
+Apenas testes UNITÁRIOS: ```docker-compose run --rm test npm run test:unit```
 
-Apenas testes de INTEGRAÇÃO: docker-compose run --rm test npm run test:integration
+Apenas testes de INTEGRAÇÃO: ```docker-compose run --rm test npm run test:integration```
 
-Gerar relatório de COBERTURA (Coverage): docker-compose run --rm test npm run coverage
+Gerar relatório de COBERTURA (Coverage): ```docker-compose run --rm test npm run coverage```
 
 
 
