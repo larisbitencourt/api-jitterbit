@@ -1,1 +1,0 @@
-{"parent":"257b82a4-1154-40b1-a407-cd2f03282702","pid":40,"argv":["/usr/local/bin/node","/usr/local/bin/npm","run","test:integration"],"execArgv":[],"cwd":"/app","time":1772973649276,"ppid":29,"coverageFilename":"/app/.nyc_output/7f2e3de0-e3f2-4a91-b8cf-f4f5baac1c68.json","externalId":"","uuid":"7f2e3de0-e3f2-4a91-b8cf-f4f5baac1c68","files":[]}
