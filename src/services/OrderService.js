@@ -76,7 +76,7 @@ class OrderService {
         }
       }
     }
-  
+
   const updateData = {
     value: data.valorTotal,
     creationDate: data.dataCriacao,
