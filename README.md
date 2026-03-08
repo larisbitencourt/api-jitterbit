@@ -140,5 +140,26 @@ Apenas testes de INTEGRAÇÃO: ```docker-compose run --rm test npm run test:inte
 
 Gerar relatório de COBERTURA (Coverage): ```docker-compose run --rm test npm run coverage```
 
+## Swagger
+
+A API do Jitterbit está documentada utilizando o Swagger (OpenAPI). Nele, você pode visualizar todos os endpoints disponíveis e realizar testes diretamente pelo navegador.
+
+Como acessar:
+
+1. Certifique-se de que a aplicação está rodando localmente.
+
+2. Acesse o endereço abaixo no seu navegador:
+
+http://localhost:3000/api-docs/
+
+Funcionalidades disponíveis para teste:
+
+- Autenticação: Login e criação de novos usuários. 
+
+ Para autenticar um usuário e ver suas permissões, faça o login na rota /login e copie o token gerado, insira o token no canto superior direito no botão Authorize. Com o token validado, os usuários com role admin podem criar novos usuários, além de criar, atualizar e deletar orders. Já os usuários com role user podem apenas acessar as listagens das orders.
+
+- CRUD: Criar, listar, atualidar e deletar orders.
+
+
 
 
