@@ -4,6 +4,7 @@ services:
   app:
     build: .
     container_name: api-jitterbit
+    command: npm run setup
     ports:
       - "3000:3000"
     volumes:
@@ -12,7 +13,18 @@ services:
     depends_on:
       - mongodb
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/jitterbit_db
+      - MONGODB_URI=mongodb://mongodb:27017/jitterbit_db
+
+  test:
+    build: .
+    command: npm test
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/jitterbit_db
+    depends_on:
+      - mongodb
+    volumes:
+      - .:/app
+      - /app/node_modules
 
   mongodb:
     image: mongo:latest

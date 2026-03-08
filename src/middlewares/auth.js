@@ -1,0 +1,31 @@
+const jwt = require('jsonwebtoken');
+
+module.exports = (req, res, next) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader) {
+    return res.status(401).json({ message: 'Token inválido' });
+  }
+
+  
+  const parts = authHeader.split(' ');
+  if (parts.length !== 2) {
+    return res.status(401).json({ message: 'Erro no formato do token' });
+  }
+
+  const [bearer, token] = parts;
+
+  if (!/^Bearer$/i.test(bearer)) {
+    return res.status(401).json({ message: 'Token malformatado' });
+  }
+  
+  jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
+    if (err) return res.status(401).json({ message: 'Token inválido ou expirado' });
+
+    req.userName = decoded.name;
+    req.userEmail = decoded.email;
+    req.userRole = decoded.role;
+
+    return next();
+  });
+};

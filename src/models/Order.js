@@ -16,13 +16,19 @@ const OrderSchema = new mongoose.Schema({
   },
   items: [
     {
-      productId: { type: Number, required: true },
+      productId: { type: String, required: true },
       quantity: { type: Number, required: true },
       price: { type: Number, required: true }
     }
   ]
-}, { 
-  versionKey: false
+});
+
+OrderSchema.pre('findOneAndUpdate', function(next) {
+  const update = this.getUpdate();
+
+  update.$inc = { __v: 1 };
+  
+  next();
 });
 
 module.exports = mongoose.model('Order', OrderSchema);
